@@ -1,0 +1,25 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title">病历信息</h3>
+	    
+    	<dl class="uk-description-list uk-description-list-divider">
+		    <dt>姓名</dt>
+		    <dd>{$patient_info.name}</dd>
+
+		    <dt>性别</dt>
+		    <dd><?php if($patient_info['sex']) { ?>男<?php } else { ?>女<?php } ?></dd>
+
+			<dt>年龄</dt>
+		    <dd>{$patient_info.age}岁</dd>
+
+		    <dt>备注</dt>
+		    <dd>
+		    	<?php if($patient_info['comment']) { ?>
+		    		{$patient_info.comment}
+		    	<?php } else { ?>
+		    		无
+		    	<?php } ?>
+		    </dd>
+		</dl>
+	</div>
+{include file="global/footer" /}

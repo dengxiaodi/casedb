@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>病历管理系统</title>
+	</head>
+	<meta charset="utf-8">
+	
+	{css href="/casedb/public/static/css/uikit.min.css" /}
+	{css href="/casedb/public/static/css/sweetalert2.min.css" /}
+	{css href="/casedb/public/static/css/theme.css" /}
+	{css href="/casedb/public/static/css/casedb.css" /}
+	
+	{js href="/casedb/public/static/js/jquery-3.2.1.min.js" /}
+
+	{js href="/casedb/public/static/js/uikit.min.js" /}
+	{js href="/casedb/public/static/js/uikit-icons.min.js" /}
+	{js href="/casedb/public/static/js/sweetalert2.min.js" /}
+
+	<body>
+		<div class="uk-navbar-container tm-navbar-container">
+			<div class="uk-container uk-container-expand">
+			    <nav class="uk-navbar">
+			        <div class="uk-navbar-left">
+			        	<a class="uk-navbar-item uk-logo" href="{:url('casedb/index/index')}">病历管理系统</a>
+			        	<div class="uk-navbar-left">
+			        		<ul class="uk-navbar-nav">
+			        			<li><a class="<?php if(request()->controller() == 'Patient') { ?>active<?php } ?>" href="{:url('casedb/patient/list')}">病例管理</a></li>
+			        			<li><a class="<?php if(request()->controller() == 'Diagnosis') { ?>active<?php } ?>" href="{:url('casedb/patient/list')}">诊断管理</a></li>
+			        			<li><a class="<?php if(request()->controller() == 'Sample') { ?>active<?php } ?>" href="{:url('casedb/patient/list')}">样本管理</a></li>
+			        		</ul>
+			        	</div>
+			        </div>
+			        <div class="uk-navbar-right">
+			            <ul class="uk-navbar-nav">
+			                <li><a href="../pro"><span class="uk-icon uk-margin-small-right" uk-icon="icon:search"></span>系统查询</a></li>
+			            </ul>
+			        </div>
+			    </nav>
+			</div>
+		</div>
+		<div class="tm-main uk-section uk-section-default">
+			<div class="uk-container uk-container-medium uk-position-relative">
+				
+			
+	

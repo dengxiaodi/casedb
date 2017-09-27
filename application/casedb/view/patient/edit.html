@@ -1,0 +1,34 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title"><?php if($edit_action == 'add') { ?> 创建病历 <?php } else { ?>编辑病历<?php } ?></h3>
+	    
+    	<form id="patient-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/patient/add'); } else { echo url('casedb/patient/update'); } ?>">
+    		<?php if($patient_info) { ?>
+    			<input type="hidden" name="id" value="{$patient_info.id}">
+    		<?php } ?>
+    		<fieldset class="uk-fieldset">
+		        <div class="uk-margin">
+		            <input class="uk-input" name="name" type="text" placeholder="姓名" value="{$patient_info.name}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <select name="sex" class="uk-select">
+		                <option value="1" <?php if($patient_info['sex']) { ?>selected<?php } ?>>男</option>
+		                <option value="0" <?php if(!$patient_info['sex']) { ?>selected<?php } ?>>女</option>
+		            </select>
+		        </div>
+
+		        <div class="uk-margin">
+		            <input class="uk-input" name="age" type="text" placeholder="年龄" value="{$patient_info.age}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注">{$patient_info.comment}</textarea>
+		        </div>
+		    </fieldset>
+		</form>
+	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
+	</div>
+{js href="/casedb/public/static/js/casedb/patient-edit.js" /}
+
+{include file="global/footer" /}

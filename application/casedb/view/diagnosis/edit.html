@@ -1,0 +1,32 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title"><?php if($edit_action == 'add') { ?> 新建诊断 <?php } else { ?>编辑诊断信息<?php } ?></h3>
+	    
+    	<form id="diagnosis-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/diagnosis/add'); } else { echo url('casedb/diagnosis/update'); } ?>">
+    		
+    		<fieldset class="uk-fieldset">
+		        <div class="uk-margin">
+		            <input class="uk-input" name="name" type="text" placeholder="姓名" ">
+		        </div>
+
+		        <div class="uk-margin">
+		            <select name="sex" class="uk-select">
+		                <option value="1">男</option>
+		                <option value="0">女</option>
+		            </select>
+		        </div>
+
+		        <div class="uk-margin">
+		            <input class="uk-input" name="age" type="text" placeholder="年龄"">
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注"></textarea>
+		        </div>
+		    </fieldset>
+		</form>
+	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
+	</div>
+{js href="/casedb/public/static/js/casedb/diagnosis-edit.js" /}
+
+{include file="global/footer" /}

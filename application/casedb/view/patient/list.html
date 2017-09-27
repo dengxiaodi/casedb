@@ -1,0 +1,46 @@
+{include file="global/header" /} 
+<h1 class="uk-h1">
+	<span>病历管理</span>
+	<ul class="uk-iconnav uk-float-right">
+	    <li title="新建病例" uk-tooltip><a href="{:url('patient/edit')}" uk-icon="icon: plus"></a></li>
+	    <li title="导出Excel" uk-tooltip><a href="#" uk-icon="icon: pull"></a></li>
+	</ul>
+</h1>
+<table class="uk-table uk-table-divider">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>诊断</th>
+            <th>取样</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<?php foreach($patient_list as $patient) { ?>
+    		<tr>
+	            <td><a href="{:url('patient/detail', ['id' => $patient.id])}"><span class="uk-text-middle">{$patient.name}</span></a></td>
+	            <td><span class="uk-text-middle"><?php if($patient['sex']) { ?>男<?php } else { ?>女<?php } ?></span></td>
+	            <td><span class="uk-text-middle">{$patient.age}</span></td>
+	            <td>
+	            	<a href="#"><span class="uk-text-middle">0次</span></a>
+	            	<a class="uk-icon-link" title="新建诊断" uk-tooltip href="{:url('diagnosis/edit')}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
+	            </td>
+	            <td>
+	            	<a href="#"><span class="uk-text-middle">0次</span></a>
+	            	<a class="uk-icon-link" title="新建采样" uk-tooltip href="{:url('sample/edit')}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
+	            </td>
+	            <td>
+	            	<ul class="uk-iconnav">
+					    <li title="编辑病例" uk-tooltip><a href="{:url('patient/edit', ['id' => $patient.id])}" uk-icon="icon: file-edit;"></a></li>
+					    <li title="删除病例" uk-tooltip><a class="delete-case" href="{:url('patient/delete', ['id' => $patient.id])}" uk-icon="icon: trash"></a></li>
+					</ul>
+	            </td>
+	        </tr>
+    	<?php } ?>
+    </tbody>
+</table>
+
+{js href="/casedb/public/static/js/casedb/patient-list.js" /}
+{include file="global/footer" /}
