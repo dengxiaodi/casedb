@@ -1,6 +1,11 @@
 {include file="global/header" /} 
 	<div class="uk-card uk-card-default uk-card-body">
-	    <h3 class="uk-card-title">病历信息</h3>
+	    <h3 class="uk-card-title">
+	    	<span>病历信息</span>
+	    	<ul class="uk-iconnav uk-float-right">
+			    <li title="编辑病例" uk-tooltip><a href="{:url('patient/edit', ['id' => $patient_info.id])}" uk-icon="icon: file-edit"></a></li>
+			</ul>
+	    </h3>
 	    
     	<dl class="uk-description-list uk-description-list-divider">
 		    <dt>姓名</dt>
@@ -12,12 +17,78 @@
 			<dt>年龄</dt>
 		    <dd>{$patient_info.age}岁</dd>
 
+		    <dt>住院号</dt>
+		    <dd>
+		    	<?php if($patient_info['hospital_id']) { ?>
+		    		No. {$patient_info.hospital_id}
+		    	<?php } else { ?>
+					<span class="c-red">无</span>
+		    	<?php } ?>
+			</dd>
+
+		    <dt>门诊号</dt>
+		    <dd>
+		    	<?php if($patient_info['department_id']) { ?>
+		    		No. {$patient_info.department_id}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>诊断</dt>
+		    <dd>
+		    	<?php if($patient_info['diagnosis']) { ?>
+		    		{$patient_info.diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>原发部位</dt>
+		    <dd>
+		    	<?php if($patient_info['primary_site']) { ?>
+		    		{$patient_info.primary_site}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>累及部位</dt>
+		    <dd>
+		    	<?php if($patient_info['involved_site']) { ?>
+		    		{$patient_info.involved_site}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>移植</dt>
+		    <dd><?php if($patient_info['transplate'] == 1) { ?>自体<?php } else if($patient_info['transplate'] == 2) { ?>异体<?php } else { ?><span class="c-red">无</span><?php } ?></dd>
+
+		    <dt>发病日期</dt>
+		    <dd>
+		    	<?php if($patient_info['onset_time']) { ?>
+		    		{$patient_info.onset_time}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>死亡日期</dt>
+		    <dd>
+		    	<?php if($patient_info['death_time']) { ?>
+		    		$patient_info.death_time}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
 		    <dt>备注</dt>
 		    <dd>
 		    	<?php if($patient_info['comment']) { ?>
 		    		{$patient_info.comment}
 		    	<?php } else { ?>
-		    		无
+		    		<span class="c-red">无</span>
 		    	<?php } ?>
 		    </dd>
 		</dl>

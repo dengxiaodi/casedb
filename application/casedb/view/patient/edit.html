@@ -23,12 +23,51 @@
 		        </div>
 
 		        <div class="uk-margin">
+		            <input class="uk-input" name="hospital_id" type="text" placeholder="住院号" value="{$patient_info.hospital_id}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <input class="uk-input" name="department_id" type="text" placeholder="门诊号" value="{$patient_info.department_id}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <input class="uk-input" name="diagnosis" type="text" placeholder="诊断" value="{$patient_info.diagnosis}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <input class="uk-input" name="primary_site" type="text" placeholder="原发部位" value="{$patient_info.primary_site}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <input class="uk-input" name="involved_site" type="text" placeholder="累及部位" value="{$patient_info.involved_site}">
+		        </div>
+
+		        <div class="uk-margin">
+		            <select name="transplate" class="uk-select">
+		            	<option value="0" <?php if(!$patient_info['transplate']) { ?>selected<?php } ?>>--选择移植类型--</option>
+		                <option value="1" <?php if($patient_info['transplate'] == 1) { ?>selected<?php } ?>>自体</option>
+		                <option value="2" <?php if($patient_info['transplate'] == 2) { ?>selected<?php } ?>>异体</option>
+		            </select>
+		        </div>
+
+		        <div class="uk-margin">
+		            <input id="onset-time" class="uk-input" type="text" name="onset_time" type="text" placeholder="发病时间">
+		        </div>
+
+		        <div class="uk-margin">
+		            <input id="death-time" class="uk-input" type="text" name="death_time" type="text" placeholder="死亡时间">
+		        </div>
+
+		        <div class="uk-margin">
 		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注">{$patient_info.comment}</textarea>
 		        </div>
 		    </fieldset>
 		</form>
 	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
 	</div>
+
+{include file="global/datetimepicker" /}
+{js href="/casedb/public/static/js/casedb/datetimepicker.js" /}
 {js href="/casedb/public/static/js/casedb/patient-edit.js" /}
 
 {include file="global/footer" /}

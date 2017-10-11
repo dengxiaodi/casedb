@@ -16,15 +16,15 @@ class Patient extends Controller
 
     public function edit() {	
     	$edit_action = 'add';
+    	$patient_info = null;
     	if(Request::instance()->has('id', 'param')) {
     		$id = Request::instance()->param('id');
     		$edit_action = 'update';
     		$patient = model('Patient');
     		$patient_info = $patient->get_patient_info($id);
-
-    		$this->assign('patient_info', $patient_info);
     	}
 
+    	$this->assign('patient_info', $patient_info);
     	$this->assign('edit_action', $edit_action);
     	return $this->fetch('edit');
     }
@@ -63,6 +63,14 @@ class Patient extends Controller
     		'name' => Request::instance()->post('name'),
     		'sex' => Request::instance()->post('sex'),
     		'age' => intval(Request::instance()->post('age')),
+    		'hospital_id' => Request::instance()->post('hospital_id'),
+    		'department_id' => Request::instance()->post('department_id'),
+    		'diagnosis' => Request::instance()->post('diagnosis'),
+    		'primary_site' => Request::instance()->post('primary_site'),
+    		'involved_site' => Request::instance()->post('involved_site'),
+    		'transplate' => Request::instance()->post('transplate'),
+    		'onset_time' => Request::instance()->post('onset_time'),
+    		'death_time' => Request::instance()->post('death_time'),
     		'comment' => Request::instance()->post('comment')
     	);
     }

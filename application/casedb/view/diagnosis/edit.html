@@ -6,7 +6,7 @@
     		
     		<fieldset class="uk-fieldset">
 		        <div class="uk-margin">
-		            <input class="uk-input" name="name" type="text" placeholder="姓名" ">
+		            <input id="create-time" class="uk-input" type="text" name="create_time" type="text" placeholder="诊断日期">
 		        </div>
 
 		        <div class="uk-margin">
@@ -27,6 +27,9 @@
 		</form>
 	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
 	</div>
+
+{include file="global/datetimepicker" /}
+{js href="/casedb/public/static/js/casedb/datetimepicker.js" /}
 {js href="/casedb/public/static/js/casedb/diagnosis-edit.js" /}
 
 {include file="global/footer" /}
