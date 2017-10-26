@@ -35,4 +35,12 @@ class Patient extends Model
 		return $this->where(array(
 		))->select();
 	}
+
+	public function update_diagnosis_count($patient_id, $diagnosis_count) {
+		$this->save(array(
+			'diagnosis_count' => intval($diagnosis_count)
+		), array(
+			'id' => intval($patient_id)
+		));
+	}
 }

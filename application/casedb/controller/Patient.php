@@ -54,7 +54,7 @@ class Patient extends Controller
     	$patient = model('Patient');
     	$patient_info = $patient->get_patient_info(Request::instance()->param('id'));
     	$this->assign('patient_info', $patient_info);
-
+    	
     	return $this->fetch('detail');
     }
 
@@ -69,8 +69,8 @@ class Patient extends Controller
     		'primary_site' => Request::instance()->post('primary_site'),
     		'involved_site' => Request::instance()->post('involved_site'),
     		'transplate' => Request::instance()->post('transplate'),
-    		'onset_time' => Request::instance()->post('onset_time'),
-    		'death_time' => Request::instance()->post('death_time'),
+    		'onset_time' => intval(Request::instance()->post('onset_time') / 1000),
+    		'death_time' => intval(Request::instance()->post('death_time') / 1000),
     		'comment' => Request::instance()->post('comment')
     	);
     }

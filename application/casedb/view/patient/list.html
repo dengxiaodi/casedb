@@ -1,5 +1,5 @@
 {include file="global/header" /} 
-<h1 class="uk-h1">
+<h1 class="uk-h1 uk-heading-divider">
 	<span>病历管理</span>
 	<ul class="uk-iconnav uk-float-right">
 	    <li title="新建病例" uk-tooltip><a href="{:url('patient/edit')}" uk-icon="icon: plus"></a></li>
@@ -24,8 +24,8 @@
 	            <td><span class="uk-text-middle"><?php if($patient['sex']) { ?>男<?php } else { ?>女<?php } ?></span></td>
 	            <td><span class="uk-text-middle">{$patient.age}</span></td>
 	            <td>
-	            	<a href="#"><span class="uk-text-middle">0次</span></a>
-	            	<a class="uk-icon-link" title="新建诊断" uk-tooltip href="{:url('diagnosis/edit')}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
+	            	<a href="{:url('diagnosis/list', ['patient_id' => $patient.id])}"><span class="uk-text-middle">{$patient.diagnosis_count}次</span></a>
+	            	<a class="uk-icon-link" title="新建诊断" uk-tooltip href="{:url('diagnosis/edit', ['patient_id' => $patient.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
 	            </td>
 	            <td>
 	            	<a href="#"><span class="uk-text-middle">0次</span></a>

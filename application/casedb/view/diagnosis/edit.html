@@ -2,26 +2,62 @@
 	<div class="uk-card uk-card-default uk-card-body">
 	    <h3 class="uk-card-title"><?php if($edit_action == 'add') { ?> 新建诊断 <?php } else { ?>编辑诊断信息<?php } ?></h3>
 	    
-    	<form id="diagnosis-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/diagnosis/add'); } else { echo url('casedb/diagnosis/update'); } ?>">
-    		
+	   	<p class="uk-h2">患者：<a href="{:url('patient/detail', ['id' => $patient_info.id])}">{$patient_info.name}</a></p>
+    	<form id="diagnosis-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/diagnosis/add'); } else { echo url('casedb/diagnosis/update', ['diagnosis_id' => $diagnosis_info['id']]); } ?>">
+    		<input type="hidden" name="patient_id" value="{$patient_id}">
     		<fieldset class="uk-fieldset">
 		        <div class="uk-margin">
-		            <input id="create-time" class="uk-input" type="text" name="create_time" type="text" placeholder="诊断日期">
+		            <input id="diagnosis-time-input" class="uk-input" type="text" target="#diagnosis-time" type="text" value="<?php if($diagnosis_info['time']) { echo date('Y-m-d H:i', intval($diagnosis_info['time']));} ?>" placeholder="诊断日期">
+		            <input type="hidden" id="diagnosis-time" name="time" value="{$diagnosis_info.time * 1000}">
 		        </div>
 
 		        <div class="uk-margin">
-		            <select name="sex" class="uk-select">
-		                <option value="1">男</option>
-		                <option value="0">女</option>
+		            <select name="stage" class="uk-select">
+		                <option value="1" <?php if($diagnosis_info['stage'] == 1) { ?>selected<?php } ?>>初发</option>
+		                <option value="2" <?php if($diagnosis_info['stage'] == 2) { ?>selected<?php } ?>>缓解</option>
+		                <option value="3" <?php if($diagnosis_info['stage'] == 3) { ?>selected<?php } ?>>复发</option>
+		                <option value="4" <?php if($diagnosis_info['stage'] == 4) { ?>selected<?php } ?>>其他</option>
 		            </select>
 		        </div>
 
 		        <div class="uk-margin">
-		            <input class="uk-input" name="age" type="text" placeholder="年龄"">
+		            <textarea class="uk-textarea" name="clinical_representation" rows="5" placeholder="临床表现">{$diagnosis_info.clinical_representation}</textarea>
 		        </div>
 
 		        <div class="uk-margin">
-		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注"></textarea>
+		            <textarea class="uk-textarea" name="diagnosis" rows="5" placeholder="诊断结果">{$diagnosis_info.diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="cytological_diagnosis" rows="5" placeholder="细胞学诊断">{$diagnosis_info.cytological_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="pathologic_diagnosis" rows="5" placeholder="病理学诊断">{$diagnosis_info.pathologic_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="immunology_diagnosis" rows="5" placeholder="免疫学诊断">{$diagnosis_info.immunology_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="cytogenetical_diagnosis" rows="5" placeholder="细胞遗传学诊断">{$diagnosis_info.cytogenetical_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="molecular_biology_diagnosis" rows="5" placeholder="分子生物学诊断">{$diagnosis_info.molecular_biology_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="genetic_diagnosis" rows="5" placeholder="基因学诊断">{$diagnosis_info.genetic_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="other_diagnosis" rows="5" placeholder="其他病理学诊断">{$diagnosis_info.other_diagnosis}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注">{$diagnosis_info.comment}</textarea>
 		        </div>
 		    </fieldset>
 		</form>

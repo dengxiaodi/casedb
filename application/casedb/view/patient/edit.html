@@ -51,11 +51,13 @@
 		        </div>
 
 		        <div class="uk-margin">
-		            <input id="onset-time" class="uk-input" type="text" name="onset_time" type="text" placeholder="发病时间">
+		            <input id="onset-time-input" class="uk-input" value="<?php if($patient_info['onset_time']) { echo date('Y-m-d H:i', intval($patient_info['onset_time']));} ?>" type="text" target="#onset-time" placeholder="发病时间">
+		            <input id="onset-time" type="hidden" name="onset_time" value="{$patient_info.onset_time * 1000}">
 		        </div>
 
 		        <div class="uk-margin">
-		            <input id="death-time" class="uk-input" type="text" name="death_time" type="text" placeholder="死亡时间">
+		            <input id="death-time-input" class="uk-input" type="text" value="<?php if($patient_info['death_time']) { echo date('Y-m-d H:i', intval($patient_info['death_time']));} ?>" target="#death-time" placeholder="死亡时间">
+		            <input id="death-time" type="hidden" name="death_time" value="{$patient_info.death_time * 1000}">
 		        </div>
 
 		        <div class="uk-margin">

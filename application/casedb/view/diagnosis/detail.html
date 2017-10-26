@@ -1,0 +1,125 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title">
+	    	<span>诊断信息</span>
+	    	<ul class="uk-iconnav uk-float-right">
+			    <li title="编辑诊断" uk-tooltip><a href="{:url('diagnosis/edit', ['diagnosis_id' => $diagnosis_info.id])}" uk-icon="icon: file-edit"></a></li>
+			</ul>
+	    </h3>
+	    
+	    <p class="uk-h2">患者：<a href="{:url('patient/detail', ['id' => $patient_info.id])}">{$patient_info.name}</a></p>
+    	<dl class="uk-description-list uk-description-list-divider">
+		    <dt>诊断日期</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['time']) { ?>
+		    		<?php echo date('Y-m-d H:i', intval($diagnosis_info['time'])); ?>
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+			
+		    <dt>疾病状态</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['stage'] == 1) { ?>
+		    		初发
+		    	<?php } else if($diagnosis_info['stage'] == 2) { ?>
+		    		缓解
+		    	<?php } else if($diagnosis_info['stage'] == 3) { ?>
+		    		复发
+		    	<?php } else { ?>
+		    		其他
+		    	<?php } ?>
+		    </dd>
+				
+			<dt>临床表现</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['clinical_representation']) { ?>
+		    		{$diagnosis_info.clinical_representation}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>诊断结果</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['diagnosis']) { ?>
+		    		{$diagnosis_info.diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>细胞学诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['cytological_diagnosis']) { ?>
+		    		{$diagnosis_info.cytological_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>病理诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['pathologic_diagnosis']) { ?>
+		    		{$diagnosis_info.pathologic_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>免疫学诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['immunology_diagnosis']) { ?>
+		    		{$diagnosis_info.immunology_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>细胞遗传学诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['cytogenetical_diagnosis']) { ?>
+		    		{$diagnosis_info.cytogenetical_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>分子生物学诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['molecular_biology_diagnosis']) { ?>
+		    		{$diagnosis_info.molecular_biology_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>基因诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['genetic_diagnosis']) { ?>
+		    		{$diagnosis_info.genetic_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>其他诊断</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['other_diagnosis']) { ?>
+		    		{$diagnosis_info.other_diagnosis}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>备注</dt>
+		    <dd>
+		    	<?php if($diagnosis_info['comment']) { ?>
+		    		{$diagnosis_info.comment}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+		</dl>
+	</div>
+{include file="global/footer" /}
