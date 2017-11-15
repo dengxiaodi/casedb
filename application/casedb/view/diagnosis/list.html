@@ -6,58 +6,53 @@
 	    <li title="导出Excel" uk-tooltip><a href="#" uk-icon="icon: pull"></a></li>
 	</ul>
 </h1>
-
-<ul uk-accordion="multiple: true">
-	<?php foreach($diagnosis_grouped_list as $patient_diagnosis) { ?>
-		<li>
-	        <h3 class="uk-accordion-title"><?php echo $patient_diagnosis['patient_info']['name']; ?> （<?php echo $patient_diagnosis['patient_info']['diagnosis_count']; ?>）</h3>
-	        <div class="uk-accordion-content">
-	        	<ul class="diagnosis-list-action-header">
-	        		<li><a href="{:url('patient/detail', ['id' => $patient_diagnosis.patient_info.id])}">病例信息</a></li>
-	        		<li><a href="{:url('diagnosis/edit', ['patient_id' => $patient_diagnosis.patient_info.id])}">新建诊断</a></li>
-	        	</ul>
-	            <table class="uk-table uk-table-divider">
-				    <thead>
-				        <tr>
-				            <th>诊断日期</th>
-				            <th>疾病状态</th>
-				            <th>临床表现</th>
-				            <th>诊断结果</th>
-				            <th>操作</th>
-				        </tr>
-				    </thead>
-				    <tbody>
-				    	<?php foreach($patient_diagnosis['diagnosis_list'] as $diagnosis_info) { ?>
-				    		<tr>
-				    			<td><?php echo date('Y-m-d H:i', intval($diagnosis_info['time'])); ?></td>
-				    			<td>
-				    				<?php if($diagnosis_info['stage'] == 1) { ?>
-							    		初发
-							    	<?php } else if($diagnosis_info['stage'] == 2) { ?>
-							    		缓解
-							    	<?php } else if($diagnosis_info['stage'] == 3) { ?>
-							    		复发
-							    	<?php } else { ?>
-							    		其他
-							    	<?php } ?>
-				    			</td>
-				    			<td><?php echo $diagnosis_info['clinical_representation']; ?></td>
-				    			<td><?php echo $diagnosis_info['diagnosis']; ?></td>
-				    			<td>
-				    				<ul class="uk-iconnav">
-				    					<li title="诊断详情" uk-tooltip><a href="{:url('diagnosis/detail', ['diagnosis_id' => $diagnosis_info.id])}" uk-icon="icon: file;"></a></li>
-									    <li title="编辑诊断" uk-tooltip><a href="{:url('diagnosis/edit', ['diagnosis_id' => $diagnosis_info.id])}" uk-icon="icon: file-edit;"></a></li>
-									    <li title="删除诊断" uk-tooltip><a class="delete-diagnosis" href="{:url('diagnosis/delete', ['diagnosis_id' => $diagnosis_info.id])}" uk-icon="icon: trash"></a></li>
-									</ul>
-				    			</td>
-					        </tr>
+<table class="uk-table uk-table-divider">
+    <thead>
+        <tr>
+        	<th>患者</th>
+        	<th>诊断编号</th>
+            <th>诊断日期</th>
+            <th>疾病状态</th>
+            <th>临床表现</th>
+            <th>诊断结果</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<?php foreach($diagnosis_grouped_list as $patient_diagnosis) { ?>
+    		<?php foreach($patient_diagnosis['diagnosis_list'] as $index => $diagnosis_info) { ?>
+	    		<tr>
+	    			<?php if($index == 0) { ?>
+	    				<td rowspan="<?php echo count($patient_diagnosis['diagnosis_list']); ?>">
+	    					<a href="{:url('patient/detail', ['id' => $patient_diagnosis.patient_info.id])}"><span class="uk-text-middle">{$patient_diagnosis.patient_info.name}</span></a>
+	    					<a class="uk-icon-link" title="新建诊断" uk-tooltip href="{:url('diagnosis/edit', ['patient_id' => $patient_diagnosis.patient_info.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a></td>
+	    			<?php } ?>
+	    			<td><a href="{:url('diagnosis/detail', ['diagnosis_id' => $diagnosis_info.id])}">d{$patient_diagnosis.patient_info.id}{$diagnosis_info.id}</a></td>
+	    			<td><?php echo date('Y-m-d H:i', intval($diagnosis_info['time'])); ?></td>
+	    			<td>
+	    				<?php if($diagnosis_info['stage'] == 1) { ?>
+				    		初发
+				    	<?php } else if($diagnosis_info['stage'] == 2) { ?>
+				    		缓解
+				    	<?php } else if($diagnosis_info['stage'] == 3) { ?>
+				    		复发
+				    	<?php } else { ?>
+				    		其他
 				    	<?php } ?>
-				    </tbody>
-				</table>
-	        </div>
-	    </li>
-	<?php } ?>
-</ul>
+	    			</td>
+	    			<td><?php echo $diagnosis_info['clinical_representation']; ?></td>
+	    			<td><?php echo $diagnosis_info['diagnosis']; ?></td>
+	    			<td>
+	    				<ul class="uk-iconnav">
+						    <li title="编辑诊断" uk-tooltip><a href="{:url('diagnosis/edit', ['diagnosis_id' => $diagnosis_info.id])}" uk-icon="icon: file-edit;"></a></li>
+						    <li title="删除诊断" uk-tooltip><a class="delete-diagnosis" href="{:url('diagnosis/delete', ['diagnosis_id' => $diagnosis_info.id])}" uk-icon="icon: trash"></a></li>
+						</ul>
+	    			</td>
+		        </tr>
+	    	<?php } ?>
+    	<?php } ?>
+    </tbody>
+</table>
 
 {js href="/casedb/public/static/js/casedb/diagnosis-list.js" /}
 {include file="global/footer" /}

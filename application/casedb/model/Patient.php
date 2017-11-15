@@ -43,4 +43,12 @@ class Patient extends Model
 			'id' => intval($patient_id)
 		));
 	}
+	
+	public function update_sample_count($patient_id, $sample_count) {
+		$this->save(array(
+			'sample_count' => intval($sample_count)
+		), array(
+			'id' => intval($patient_id)
+		));
+	}
 }

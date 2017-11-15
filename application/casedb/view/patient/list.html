@@ -28,8 +28,8 @@
 	            	<a class="uk-icon-link" title="新建诊断" uk-tooltip href="{:url('diagnosis/edit', ['patient_id' => $patient.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
 	            </td>
 	            <td>
-	            	<a href="#"><span class="uk-text-middle">0次</span></a>
-	            	<a class="uk-icon-link" title="新建采样" uk-tooltip href="{:url('sample/edit')}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
+	            	<a href="#"><span class="uk-text-middle">{$patient.sample_count}次</span></a>
+	            	<a class="uk-icon-link" title="新建采样" uk-tooltip href="{:url('sample/edit', ['patient_id' => $patient.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
 	            </td>
 	            <td>
 	            	<ul class="uk-iconnav">

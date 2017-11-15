@@ -1,3 +1,41 @@
 {include file="global/header" /} 
-	abc
+
+<div class="uk-section uk-section-primary uk-light uk-position-relative">
+	<div id="particles-js"></div>
+    <div class="uk-container uk-text-center">
+        <h1>病例管理系统</h1>
+        <div>科学有效的病例、诊断、样本及实验管理解决方案</div>
+    </div>
+</div>
+
+<div class="uk-section uk-section-muted">
+    <div class="uk-container">
+        <div class="uk-grid-match uk-child-width-1-4@m" uk-grid>
+            <div class="uk-text-center">
+                <p>管理病人基本信息</p>
+                <div class="uk-margin" id="patient-count" data-count="{$patient_count}" data-color="#F44336"></div>
+                <a class="uk-button uk-button-primary" href="{:url('casedb/patient/list')}">开始管理</a>
+            </div>
+            <div class="uk-text-center">
+                <p>详细记录每次的诊断</p>
+                <div class="uk-margin" id="diagnosis-count" data-count="{$diagnosis_count}" data-color="#4CAF50"></div>
+                <a class="uk-button uk-button-primary" href="{:url('casedb/diagnosis/list')}">开始管理</a>
+            </div>
+            <div class="uk-text-center">
+                <p>管理病人组织的样本</p>
+                <div class="uk-margin" id="sample-count" data-count="{$sample_count}" data-color="#2196F3"></div>
+                <a class="uk-button uk-button-primary" href="{:url('casedb/sample/list')}">开始管理</a>
+            </div>
+            <div class="uk-text-center">
+                <p>追踪样本的实验记录</p>
+                <div class="uk-margin" id="experiment-count" data-count="{$experiment_count}" data-color="#FF9800"></div>
+                <a class="uk-button uk-button-primary" href="{:url('casedb/experiment/list')}">开始管理</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{js href="/casedb/public/static/js/particles.min.js" /}
+{js href="/casedb/public/static/js/radialIndicator.js" /}
+{js href="/casedb/public/static/js/casedb/index.js" /}
 {include file="global/footer" /}

@@ -1,0 +1,46 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title">
+	    	<span>实验信息</span>
+	    	<ul class="uk-iconnav uk-float-right">
+			    <li title="编辑实验" uk-tooltip><a href="{:url('experiment/edit', ['id' => $experiment_info.id])}" uk-icon="icon: file-edit"></a></li>
+			</ul>
+	    </h3>
+	    
+	    <p class="uk-h2">样本信息：<a href="{:url('sample/detail', ['sample_id' => $experiment_info.sample_id])}">s{$sample_info.patient_id}{$sample_info.id}</a></p>
+
+    	<dl class="uk-description-list uk-description-list-divider">
+			<dt>实验类型</dt>
+		    <dd>
+		    	{$experiment_info.experiment_type}
+		    </dd>
+
+		    <dt>实验记录</dt>
+		    <dd>
+		    	<?php if($experiment_info['note']) { ?>
+		    		{$experiment_info.note}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+			</dd>
+
+		    <dt>文库信息</dt>
+		    <dd>
+		    	<?php if($experiment_info['library']) { ?>
+		    		{$experiment_info.library}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+			
+		    <dt>备注</dt>
+		    <dd>
+		    	<?php if($experiment_info['comment']) { ?>
+		    		{$experiment_info.comment}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+		</dl>
+	</div>
+{include file="global/footer" /}

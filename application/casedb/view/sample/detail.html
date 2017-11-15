@@ -1,0 +1,54 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title">
+	    	<span>样本信息</span>
+	    	<ul class="uk-iconnav uk-float-right">
+			    <li title="编辑样本" uk-tooltip><a href="{:url('sample/edit', ['id' => $sample_info.id])}" uk-icon="icon: file-edit"></a></li>
+			</ul>
+	    </h3>
+	    
+	    <p class="uk-h2">患者信息：<a href="{:url('patient/detail', ['id' => $patient_info.id])}">{$patient_info.name}</a></p>
+
+    	<dl class="uk-description-list uk-description-list-divider">
+			<dt>取样日期</dt>
+		    <dd>
+		    	<?php echo date('Y-m-d H:i', intval($sample_info['sample_time'])); ?>
+		    </dd>
+
+		    <dt>取样组织</dt>
+		    <dd>
+		    	{$sample_info.tissue}
+			</dd>
+
+		    <dt>样品类型</dt>
+		    <dd>{$sample_info.type}</dd>
+			
+		    <dt>样本量</dt>
+		    <dd>
+		    	<?php if($sample_info['amount']) { ?>
+		    		{$sample_info.amount}
+		    	<?php } else { ?>
+					<span class="c-red">无</span>
+		    	<?php } ?>
+			</dd>
+
+		    <dt>存放位置</dt>
+		    <dd>
+		    	<?php if($sample_info['location']) { ?>
+		    		{$sample_info.location}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+			
+		    <dt>备注</dt>
+		    <dd>
+		    	<?php if($sample_info['comment']) { ?>
+		    		{$sample_info.comment}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+		</dl>
+	</div>
+{include file="global/footer" /}

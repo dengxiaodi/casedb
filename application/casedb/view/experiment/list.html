@@ -1,0 +1,43 @@
+{include file="global/header" /} 
+<h1 class="uk-h1 uk-heading-divider">
+	<span>实验管理</span>
+	<ul class="uk-iconnav uk-float-right">
+	    <li title="查询实验" uk-tooltip><a href="#" uk-icon="icon: search"></a></li>
+	    <li title="导出Excel" uk-tooltip><a href="#" uk-icon="icon: pull"></a></li>
+	</ul>
+</h1>
+
+<table class="uk-table uk-table-divider">
+    <thead>
+        <tr>
+        	<th>样本编号</th>
+        	<th>实验编号</th>
+            <th>实验类型</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<?php foreach($experiment_grouped_list as $sample_experiment) { ?>
+    		<?php foreach($sample_experiment['experiment_list'] as $index => $experiment_info) { ?>
+	    		<tr>
+	    			<?php if($index == 0) { ?>
+	    				<td rowspan="<?php echo count($sample_experiment['experiment_list']); ?>">
+	    					<a href="{:url('sample/detail', ['sample_id' => $sample_experiment.sample_info.id])}"><span class="uk-text-middle">s{$sample_experiment.sample_info.patient_id}{$sample_experiment.sample_info.id}</span></a>
+	    					<a class="uk-icon-link" title="新建实验" uk-tooltip href="{:url('experiment/edit', ['sample_id' => $sample_experiment.sample_info.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a></td>
+	    			<?php } ?>
+	    			<td><a href="{:url('experiment/detail', ['experiment_id' => $experiment_info.id])}">e{$experiment_info.sample_id}{$experiment_info.id}</a></td>
+	    			<td><?php echo $experiment_info['experiment_type']; ?></td>
+	    			<td>
+	    				<ul class="uk-iconnav">
+						    <li title="编辑实验" uk-tooltip><a href="{:url('experiment/edit', ['experiment_id' => $experiment_info.id])}" uk-icon="icon: file-edit;"></a></li>
+						    <li title="删除实验" uk-tooltip><a class="delete-experiment" href="{:url('experiment/delete', ['experiment_id' => $experiment_info.id])}" uk-icon="icon: trash"></a></li>
+						</ul>
+	    			</td>
+		        </tr>
+	    	<?php } ?>
+    	<?php } ?>
+    </tbody>
+</table>
+
+{js href="/casedb/public/static/js/casedb/experiment-list.js" /}
+{include file="global/footer" /}

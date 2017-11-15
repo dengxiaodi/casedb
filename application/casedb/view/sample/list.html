@@ -1,0 +1,54 @@
+{include file="global/header" /} 
+<h1 class="uk-h1 uk-heading-divider">
+	<span>样本管理</span>
+	<ul class="uk-iconnav uk-float-right">
+	    <li title="查询样本" uk-tooltip><a href="#" uk-icon="icon: search"></a></li>
+	    <li title="导出Excel" uk-tooltip><a href="#" uk-icon="icon: pull"></a></li>
+	</ul>
+</h1>
+
+<table class="uk-table uk-table-divider">
+    <thead>
+        <tr>
+        	<th>患者</th>
+        	<th>样本编号</th>
+            <th>取样日期</th>
+            <th>样本组织</th>
+            <th>样本类型</th>
+            <th>存放位置</th>
+            <th>实验记录</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<?php foreach($sample_grouped_list as $patient_sample) { ?>
+    		<?php foreach($patient_sample['sample_list'] as $index => $sample_info) { ?>
+	    		<tr>
+	    			<?php if($index == 0) { ?>
+	    				<td rowspan="<?php echo count($patient_sample['sample_list']); ?>">
+	    					<a href="{:url('patient/detail', ['id' => $patient_sample.patient_info.id])}"><span class="uk-text-middle">{$patient_sample.patient_info.name}</span></a>
+	    					<a class="uk-icon-link" title="新建样本" uk-tooltip href="{:url('sample/edit', ['patient_id' => $patient_sample.patient_info.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a></td>
+	    			<?php } ?>
+	    			<td><a href="{:url('sample/detail', ['sample_id' => $sample_info.id])}">s{$patient_sample.patient_info.id}{$sample_info.id}</a></td>
+	    			<td><?php echo date('Y-m-d H:i', intval($sample_info['sample_time'])); ?></td>
+	    			<td><?php echo $sample_info['tissue']; ?></td>
+	    			<td><?php echo $sample_info['type']; ?></td>
+	    			<td><?php if($sample_info['location']) { echo $sample_info['location']; } else { ?><span class="c-red">无</span><?php } ?></td>
+	    			<td>
+	    				<a href="{:url('experiment/list', ['sample_id' => $sample_info.id])}"><span class="uk-text-middle">{$sample_info.experiment_count}次</span></a>
+	    				<a class="uk-icon-link" title="新建实验" uk-tooltip href="{:url('experiment/edit', ['sample_id' => $sample_info.id])}" uk-icon="icon: plus-circle; ratio: 0.9"></a>
+	    			</td>
+	    			<td>
+	    				<ul class="uk-iconnav">
+						    <li title="编辑样本" uk-tooltip><a href="{:url('sample/edit', ['sample_id' => $sample_info.id])}" uk-icon="icon: file-edit;"></a></li>
+						    <li title="删除样本" uk-tooltip><a class="delete-sample" href="{:url('sample/delete', ['sample_id' => $sample_info.id])}" uk-icon="icon: trash"></a></li>
+						</ul>
+	    			</td>
+		        </tr>
+	    	<?php } ?>
+    	<?php } ?>
+    </tbody>
+</table>
+
+{js href="/casedb/public/static/js/casedb/sample-list.js" /}
+{include file="global/footer" /}

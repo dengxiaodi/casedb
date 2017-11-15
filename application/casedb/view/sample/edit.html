@@ -1,0 +1,56 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title"><?php if($edit_action == 'add') { ?> 新建样本 <?php } else { ?>编辑样本信息<?php } ?></h3>
+	 	
+	   	<p class="uk-h2">取样患者：<a href="{:url('patient/detail', ['id' => $patient_info.id])}">{$patient_info.name}</a></p>
+    	<form id="sample-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/sample/add'); } else { echo url('casedb/sample/update', ['sample_id' => $sample_info['id']]); } ?>">
+    		<input type="hidden" name="patient_id" value="{$patient_id}">
+    		<fieldset class="uk-fieldset">
+		        <div class="uk-margin">
+		            <input id="sample-time-input" class="uk-input" type="text" target="#sample-time" type="text" value="<?php if($sample_info['sample_time']) { echo date('Y-m-d H:i', intval($sample_info['sample_time']));} ?>" placeholder="取样日期">
+		            <input type="hidden" id="sample-time" name="sample_time" value="<?php if($sample_info['sample_time']) { ?>{$sample_info.sample_time * 1000}<?php } ?>">
+		        </div>
+				
+				<div class="uk-margin">
+			        <input class="uk-input" type="text" name="tissue" placeholder="取样组织" list="tissues" value="{$sample_info.tissue}" />
+					<datalist id="tissues">
+						<option value="骨髓">
+						<option value="外周血">
+						<option value="尿液">
+						<option value="便">
+						<option value="脑脊液">
+					</datalist>
+				</div>
+				
+				<div class="uk-margin">
+					<input class="uk-input" type="text" name="type" placeholder="样品类型" list="types" value="{$sample_info.type}" />
+					<datalist id="types">
+						<option value="细胞">
+						<option value="血浆">
+						<option value="肿物">
+						<option value="上清">
+						<option value="沉淀">
+					</datalist>
+				</div>
+
+				<div class="uk-margin">
+					<input class="uk-input" type="text" name="amount" placeholder="样本量" value="{$sample_info.amount}" />
+		        </div>
+
+		        <div class="uk-margin">
+					<input class="uk-input" type="text" name="location" placeholder="存放位置" value="{$sample_info.location}" />
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注">{$sample_info.comment}</textarea>
+		        </div>
+		    </fieldset>
+		</form>
+	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
+	</div>
+
+{include file="global/datetimepicker" /}
+{js href="/casedb/public/static/js/casedb/datetimepicker.js" /}
+{js href="/casedb/public/static/js/casedb/sample-edit.js" /}
+
+{include file="global/footer" /}

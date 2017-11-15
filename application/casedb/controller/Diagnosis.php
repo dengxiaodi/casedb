@@ -49,6 +49,7 @@ class Diagnosis extends Controller
     	if(Request::instance()->has('patient_id', 'param')) {
     		$patient_id = Request::instance()->param('patient_id');
     	}
+    	
     	$diagnosis_grouped_list = $diagnosis->get_grouped_diagnosis_list($patient_id);
     	$this->assign('diagnosis_grouped_list', $diagnosis_grouped_list);
 

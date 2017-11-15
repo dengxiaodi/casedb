@@ -53,6 +53,18 @@ class Diagnosis extends Model
 		return $diagnosis_grouped_list;
 	}
 
+	public function get_diagnosis_list() {
+		$diagnosis_list = $this->where(array(
+		))->order('time desc, patient_id')->select();
+
+		$patient = model('Patient');
+		foreach ($diagnosis_list as $key => $value) {
+			$diagnosis_list[$key]['patient_info'] = $patient->get_patient_info($value['patient_id']);
+		}
+
+		return $diagnosis_list;
+	}
+
 	public function update_diagnosis_count($patient_id) {
 		$count = $this->where(array(
 			'patient_id' => intval($patient_id)

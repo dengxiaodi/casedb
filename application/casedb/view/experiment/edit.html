@@ -1,0 +1,38 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title"><?php if($edit_action == 'add') { ?> 新建实验 <?php } else { ?>编辑实验信息<?php } ?></h3>
+	 	
+	   	<p class="uk-h2">样本编号：<a href="{:url('sample/detail', ['sample_id' => $sample_info.id])}">s{$sample_info.patient_id}{$sample_info.id}</a></p>
+    	<form id="experiment-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/experiment/add'); } else { echo url('casedb/experiment/update', ['experiment_id' => $experiment_info['id']]); } ?>">
+    		<input type="hidden" name="sample_id" value="{$sample_info.id}">
+    		<fieldset class="uk-fieldset">
+				<div class="uk-margin">
+			        <input class="uk-input" type="text" name="experiment_type" placeholder="实验类型" list="experiment-types" value="{$experiment_info.experiment_type}" />
+					<datalist id="experiment-types">
+						<option value="DNA">
+						<option value="cDNA">
+						<option value="RNA">
+					</datalist>
+				</div>
+
+				<div class="uk-margin">
+		            <textarea class="uk-textarea" name="note" rows="5" placeholder="实验记录">{$experiment_info.note}</textarea>
+		        </div>
+
+				<div class="uk-margin">
+		            <textarea class="uk-textarea" name="library" rows="5" placeholder="文库信息">{$experiment_info.library}</textarea>
+		        </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注">{$experiment_info.comment}</textarea>
+		        </div>
+		    </fieldset>
+		</form>
+	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
+	</div>
+
+{include file="global/datetimepicker" /}
+{js href="/casedb/public/static/js/casedb/datetimepicker.js" /}
+{js href="/casedb/public/static/js/casedb/experiment-edit.js" /}
+
+{include file="global/footer" /}
