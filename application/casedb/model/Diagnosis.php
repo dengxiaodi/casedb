@@ -40,17 +40,22 @@ class Diagnosis extends Model
 		$diagnosis_grouped_list = array();
 		if($patient_id) {
 			$diagnosis_grouped_list[$patient_id] = $this->get_patient_diagnosis($patient_id);
+			$pagination = null;
 		} else {
 			// get patient ids
 
-			$patient_ids = $this->distinct(true)->field('patient_id')->column('patient_id');
+			$diagnosis_list = $this->distinct(true)->field('patient_id')->paginate(10);
+			$pagination = $diagnosis_list->render();
 
-			foreach ($patient_ids as $patient_id) {
-				$diagnosis_grouped_list[$patient_id] = $this->get_patient_diagnosis($patient_id);
+			foreach ($diagnosis_list as $diagnosis_info) {
+				$diagnosis_grouped_list[$diagnosis_info['patient_id']] = $this->get_patient_diagnosis($diagnosis_info['patient_id']);
 			}
 		}
-
-		return $diagnosis_grouped_list;
+		
+		return array(
+			'list' => $diagnosis_grouped_list,
+			'pagination' => $pagination
+		);
 	}
 
 	public function get_diagnosis_list() {

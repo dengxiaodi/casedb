@@ -33,7 +33,7 @@ class Patient extends Model
 
 	public function get_patient_list() {
 		return $this->where(array(
-		))->select();
+		))->paginate(10);
 	}
 
 	public function update_diagnosis_count($patient_id, $diagnosis_count) {

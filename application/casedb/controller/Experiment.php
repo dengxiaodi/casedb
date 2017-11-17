@@ -47,8 +47,9 @@ class Experiment extends Controller
         if(Request::instance()->has('sample_id', 'param')) {
             $sample_id = Request::instance()->param('sample_id');
         }
-        $experiment_grouped_list = $experiment->get_grouped_experiment_list($sample_id);
-        $this->assign('experiment_grouped_list', $experiment_grouped_list);
+        $grouped_experiment = $experiment->get_grouped_experiment_list($sample_id);
+        $this->assign('experiment_grouped_list', $grouped_experiment['list']);
+        $this->assign('pagination', $grouped_experiment['pagination']);
 
         return $this->fetch('list');
     }

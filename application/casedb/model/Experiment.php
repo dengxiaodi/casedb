@@ -40,17 +40,22 @@ class Experiment extends Model
 		$experiment_grouped_list = array();
 		if($sample_id) {
 			$experiment_grouped_list[$sample_id] = $this->get_sample_experiment($sample_id);
+			$pagination = null;
 		} else {
 			// get sample ids
 
-			$sample_ids = $this->distinct(true)->field('sample_id')->column('sample_id');
+			$experiment_list = $this->distinct(true)->field('sample_id')->paginate(10);
+			$pagination = $experiment_list->render();
 
-			foreach ($sample_ids as $sample_id) {
-				$experiment_grouped_list[$sample_id] = $this->get_sample_experiment($sample_id);
+			foreach ($experiment_list as $experiment_info) {
+				$experiment_grouped_list[$experiment_info['sample_id']] = $this->get_sample_experiment($experiment_info['sample_id']);
 			}
 		}
 
-		return $experiment_grouped_list;
+		return array(
+			'list' => $experiment_grouped_list,
+			'pagination' => $pagination
+		);
 	}
 
 	public function update_experiment_count($sample_id) {

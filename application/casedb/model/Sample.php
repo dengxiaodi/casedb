@@ -40,17 +40,22 @@ class Sample extends Model
 		$sample_grouped_list = array();
 		if($patient_id) {
 			$sample_grouped_list[$patient_id] = $this->get_patient_sample($patient_id);
+			$pagination = null;
 		} else {
 			// get patient ids
 
-			$patient_ids = $this->distinct(true)->field('patient_id')->column('patient_id');
+			$sample_list = $this->distinct(true)->field('patient_id')->paginate(10);
+			$pagination = $sample_list->render();
 
-			foreach ($patient_ids as $patient_id) {
-				$sample_grouped_list[$patient_id] = $this->get_patient_sample($patient_id);
+			foreach ($sample_list as $sample_info) {
+				$sample_grouped_list[$sample_info['patient_id']] = $this->get_patient_sample($sample_info['patient_id']);
 			}
 		}
 
-		return $sample_grouped_list;
+		return array(
+			'list' => $sample_grouped_list,
+			'pagination' => $pagination
+		);
 	}
 
 	public function update_sample_count($patient_id) {

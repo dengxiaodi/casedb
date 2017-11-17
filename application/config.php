@@ -234,7 +234,8 @@ return [
 
     //分页配置
     'paginate'               => [
-        'type'      => 'bootstrap',
+        'type'      => '\\app\\casedb\\paginator\\uikit',
+        'namespace' => '\\app\\casedb\\paginator\\',
         'var_page'  => 'page',
         'list_rows' => 15,
     ],

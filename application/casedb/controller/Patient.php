@@ -11,6 +11,7 @@ class Patient extends Controller
     	$patient_list = $patient->get_patient_list();
 
     	$this->assign('patient_list', $patient_list);
+    	$this->assign('pagination', $patient_list->render());
         return $this->fetch('list');
     }
 

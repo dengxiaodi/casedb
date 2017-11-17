@@ -49,8 +49,9 @@ class Sample extends Controller
         if(Request::instance()->has('patient_id', 'param')) {
             $patient_id = Request::instance()->param('patient_id');
         }
-        $sample_grouped_list = $sample->get_grouped_sample_list($patient_id);
-        $this->assign('sample_grouped_list', $sample_grouped_list);
+        $grouped_sample = $sample->get_grouped_sample_list($patient_id);
+        $this->assign('sample_grouped_list', $grouped_sample['list']);
+        $this->assign('pagination', $grouped_sample['pagination']);
 
         return $this->fetch('list');
     }
