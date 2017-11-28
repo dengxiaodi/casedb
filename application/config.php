@@ -239,4 +239,8 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    'migration' => [
+        'path' => ROOT_PATH .'vendor/gmars/tp5-rbac/'
+    ]
 ];

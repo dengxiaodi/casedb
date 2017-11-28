@@ -1,0 +1,66 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title">
+	    	<span>用户设置</span>
+	    </h3>
+	    
+	    <div>
+	    	<span class="uk-h2">用户名：{$user_info.name}</span>
+	    	<ul class="uk-iconnav uk-float-right">
+	    		<li><a href="{:url('account/changepassword', ['user_id' => $user_info.id])}"><span class="uk-icon uk-margin-small-right" uk-icon="icon:lock"></span>修改密码</a></li>
+			    <li><a href="{:url('account/edit', ['user_id' => $user_info.id])}"><span class="uk-icon uk-margin-small-right" uk-icon="icon:file-edit"></span>修改资料</a></li>
+			</ul>
+	    </div>
+    	<dl class="uk-description-list uk-description-list-divider">
+		    <dt>电子邮件</dt>
+		    <dd>{$user_info.email}</dd>
+			
+			<dt>用户权限</dt>
+		    <dd>
+		    	<?php if($user_info['role'] == 0) { ?>
+		    		超级管理员
+		    	<?php } else if($user_info['role'] == 1) { ?>
+		    		管理人员
+		    	<?php } else if($user_info['role'] == 10) { ?>
+		    		工作人员
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>职务</dt>
+		    <dd>
+		    	<?php if($user_info['title']) { ?>
+		    		{$user_info.title}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>联系电话</dt>
+		    <dd>
+		    	<?php if($user_info['phone']) { ?>
+		    		{$user_info.phone}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>办公室</dt>
+		    <dd>
+		    	<?php if($user_info['office']) { ?>
+		    		{$user_info.office}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+
+		    <dt>备注</dt>
+		    <dd>
+		    	<?php if($user_info['comment']) { ?>
+		    		{$user_info.comment}
+		    	<?php } else { ?>
+		    		<span class="c-red">无</span>
+		    	<?php } ?>
+		    </dd>
+		</dl>
+	</div>
+{include file="global/footer" /}

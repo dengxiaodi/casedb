@@ -37,6 +37,19 @@
 			        <div class="uk-navbar-right">
 			            <ul class="uk-navbar-nav">
 			                <li><a href="../pro"><span class="uk-icon uk-margin-small-right" uk-icon="icon:search"></span>系统查询</a></li>
+			                <li>
+			                	<a href="#"><span class="uk-icon uk-margin-small-right" uk-icon="icon:user"></span>{$login_user.name}</a>
+			                	<div uk-dropdown>
+							        <ul class="uk-nav uk-dropdown-nav">
+							        	<?php if($login_user['role'] != 0) { ?>
+							            	<li><a href="{:url('casedb/account/edit', ['user_id' => $login_user['id']])}"><span class="uk-icon uk-margin-small-right" uk-icon="icon:users"></span>管理用户</a></li>
+							            	<li class="uk-nav-divider"></li>
+							            <?php } ?>
+							            <li><a href="{:url('casedb/account/detail', ['user_id' => $login_user['id']])}"><span class="uk-icon uk-margin-small-right" uk-icon="icon:cog"></span>用户设置</a></li>
+							            <li><a href="{:url('casedb/account/logout')}"><span class="uk-icon uk-margin-small-right" uk-icon="icon:sign-out"></span>退出登录</a></li>
+							        </ul>
+							    </div>
+			                </li>
 			            </ul>
 			        </div>
 			    </nav>

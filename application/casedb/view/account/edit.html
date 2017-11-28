@@ -1,0 +1,54 @@
+{include file="global/header" /} 
+	<div class="uk-card uk-card-default uk-card-body">
+	    <h3 class="uk-card-title"><?php if($edit_action == 'add') { ?> 新建用户 <?php } else { ?>修改用户信息<?php } ?></h3>
+	    
+    	<form id="account-form" method="post" action="<?php if($edit_action == 'add') { echo url('casedb/account/add'); } else { echo url('casedb/account/update', ['user_id' => $user_info['id']]); } ?>">
+    		<input type="hidden" name="user_id" value="{$user_info.id}">
+    		<fieldset class="uk-fieldset">
+    			<?php if($edit_action == 'add') { ?>
+	    			<div class="uk-margin">
+						<input class="uk-input" type="text" name="name" placeholder="用户名" />
+			        </div>
+			        <div class="uk-margin">
+						<input class="uk-input" type="password" name="password" placeholder="密码" />
+			        </div>
+			        <div class="uk-margin">
+						<input class="uk-input" type="password" name="password_repeat" placeholder="确认密码" />
+			        </div>
+		        <?php } ?>
+
+		        <div class="uk-margin">
+					<input class="uk-input" type="text" name="email" placeholder="电子邮件" value="{$user_info.email}" />
+			    </div>
+				
+				<?php if($login_user['role'] == 0) { ?>
+			        <div class="uk-margin">
+			            <select name="role" class="uk-select">
+			                <option value="10" <?php if($user_info['role'] == 10) { ?>selected<?php } ?>>工作人员</option>
+			                <option value="1" <?php if($user_info['role'] == 1) { ?>selected<?php } ?>>管理人员</option>
+			            </select>
+			        </div>
+		        <?php } ?>
+
+		        <div class="uk-margin">
+					<input class="uk-input" type="text" name="title" placeholder="职务" value="{$user_info.title}" />
+			    </div>
+
+			    <div class="uk-margin">
+					<input class="uk-input" type="text" name="phone" placeholder="联系电话" value="{$user_info.phone}" />
+			    </div>
+
+			    <div class="uk-margin">
+					<input class="uk-input" type="text" name="office" placeholder="办公室" value="{$user_info.office}" />
+			    </div>
+
+		        <div class="uk-margin">
+		            <textarea class="uk-textarea" name="comment" rows="5" placeholder="备注">{$user_info.comment}</textarea>
+		        </div>
+		    </fieldset>
+		</form>
+	    <button id="submit" class="uk-button uk-button-primary">提交信息</button>
+	</div>
+
+{js href="/casedb/public/static/js/casedb/account-edit.js" /}
+{include file="global/footer" /}

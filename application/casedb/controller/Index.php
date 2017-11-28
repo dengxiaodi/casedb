@@ -3,10 +3,12 @@ namespace app\casedb\controller;
 
 use think\Controller;
 
-class Index extends Controller 
+class Index extends AdminController 
 {
     public function index()
     {
+    	$this->check_login();
+
     	$patient = model('Patient');
     	$patient_count = $patient->count();
 
@@ -18,7 +20,7 @@ class Index extends Controller
 
     	$experiment = model('Experiment');
     	$experiment_count = $experiment->count();
-
+    	
     	$this->assign('patient_count', $patient_count);
     	$this->assign('diagnosis_count', $diagnosis_count);
     	$this->assign('sample_count', $sample_count);
